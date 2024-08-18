@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_generator/view/home/controller/home_provider..dart';
+import 'package:image_generator/view/home/controller/home_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

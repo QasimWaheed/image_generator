@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -30,21 +29,22 @@ class HomeProvider extends ChangeNotifier {
       return;
     }
 
-    final response = await http.post(
-      Uri.parse("$baseUrl/$apiHost/generate/ultra"),
-      headers: {"Authorization": "Bearer $apiKey", "Accept": "image/*", },
-      
-      body: {
-        "prompt": prompt,
-        "output_format": "jpeg/png/jpg",
-      },
-    );
+    final request = http.MultipartRequest(
+        "Post", Uri.parse("$baseUrl/$apiHost/generate/ultra"))
+      ..headers['Authorization'] = "Bearer $apiKey"
+      ..headers["Accept"] = "image/*"
+      ..fields["prompt"] = prompt;
+      // ..fields["output_format"] = "jpeg/png/jpg";
+
+    
+
+    final response = await request.send();
 
     if (response.statusCode == 200) {
-      imageData = response.bodyBytes;
+      imageData = await response.stream.toBytes();
       notifyListeners();
     } else {
-      debugPrint("Error: ${response.body}");
+      debugPrint("Error: ${response.statusCode}");
     }
 
     loadingUpdate(false);

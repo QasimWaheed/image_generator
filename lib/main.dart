@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_generator/view/home/controller/home_provider..dart';
+import 'package:image_generator/view/home/controller/home_provider.dart';
 import 'package:image_generator/view/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
